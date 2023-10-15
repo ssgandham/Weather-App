@@ -56,8 +56,10 @@ dependencies {
 
     // Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.6.2")
+    implementation ("com.squareup.retrofit:converter-gson:2.0.0-beta2")
 
     implementation ("com.karumi:dexter:6.0.1")
-    implementation ("com.squareup.retrofit2:retrofit:2.6.2")
-    implementation ("com.squareup.retrofit:converter-gson:2.0.0-beta2")
+
+
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
 }

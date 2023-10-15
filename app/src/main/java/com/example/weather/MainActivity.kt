@@ -9,13 +9,13 @@ import android.content.SharedPreferences
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.weather.databinding.ActivityMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -30,10 +30,15 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.weatherapp.models.WeatherResponse
 import com.weatherapp.network.WeatherService
 import com.weatherapp.utils.Constants
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit.GsonConverterFactory
+import retrofit.*
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
-import retrofit.*
+
+
 class MainActivity : AppCompatActivity() {
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private lateinit var mSharedPreferences: SharedPreferences
@@ -139,17 +144,25 @@ class MainActivity : AppCompatActivity() {
 
             val mLastLocation: Location = locationResult.lastLocation
             mLatitude = mLastLocation.latitude
-            Log.e("Current Latitude", "$mLatitude")
+            Log.d("Current Latitude", "$mLatitude")
             mLongitude = mLastLocation.longitude
-            Log.e("Current Longitude", "$mLongitude")
-
+            Log.d("Current Longitude", "$mLongitude")
+            Log.d("Before going to getLocationWeatherDetails", "")
             getLocationWeatherDetails()
         }
     }
 
     private fun getLocationWeatherDetails() {
+        Log.d("Went to getLocationWeatherDetails", "")
+
 
         if (Constants.isNetworkAvailable(this)) {
+            val okHttpClient = OkHttpClient().newBuilder()
+                .addInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                })
+                .build()
+
             val retrofit: Retrofit = Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -160,7 +173,7 @@ class MainActivity : AppCompatActivity() {
              *i.e GET, POST and so on along with the request parameter which are required.
              */
             val service: WeatherService =
-                retrofit.create<WeatherService>(WeatherService::class.java)
+                retrofit.create(WeatherService::class.java)
 
             /** An invocation of a Retrofit method that sends a request to a web-server and returns a response.
              * Here we pass the required param in the service
@@ -168,6 +181,9 @@ class MainActivity : AppCompatActivity() {
             val listCall: Call<WeatherResponse> = service.getWeather(
                 mLatitude, mLongitude, Constants.METRIC_UNIT, Constants.APP_ID
             )
+
+
+            Log.d("listCall","")
 
             // Callback methods are executed using the Retrofit callback executor.
             listCall.enqueue(object : Callback<WeatherResponse> {
@@ -181,7 +197,9 @@ class MainActivity : AppCompatActivity() {
                     if (response.isSuccess) {
 
                         /** The de-serialized response body of a successful response. */
+                        Log.d("response.body()", "${response.body()}")
                         val weatherList: WeatherResponse = response.body()
+                        Log.d("weatherList", "$weatherList")
                         Log.i("Response Result", "$weatherList")
 
                         // TODO (STEP 4: Here we convert the response object to string and store the string in the SharedPreference.)
@@ -217,6 +235,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(t: Throwable) {
+                    Log.e("onFailure", "$t")
                 }
             })
         } else {
