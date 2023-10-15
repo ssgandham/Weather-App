@@ -31,7 +31,7 @@
                 android:padding="@dimen/card_view_content_padding">
 
                 <ImageView
-                    android:id="@+id/iv_main"
+                    android:id="@+id/iv_weatherCondition"
                     android:layout_width="@dimen/identification_image_size"
                     android:layout_height="@dimen/identification_image_size"
                     android:layout_marginEnd="@dimen/identification_image_marginEnd"
@@ -42,6 +42,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/tv_weather"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -50,6 +51,7 @@
                         android:textStyle="bold"
                         tools:text="Weather" />
                     <TextView
+                        android:id="@+id/tv_condition"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -81,6 +83,7 @@
                 android:padding="@dimen/card_view_content_padding">
 
                 <ImageView
+                    android:id="@+id/iv_degreePercent"
                     android:layout_width="@dimen/identification_image_size"
                     android:layout_height="@dimen/identification_image_size"
                     android:layout_marginEnd="@dimen/identification_image_marginEnd"
@@ -91,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/tv_degree"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -99,6 +103,7 @@
                         android:textStyle="bold"
                         tools:text="Degree" />
                     <TextView
+                        android:id="@+id/tv_percent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -135,6 +140,7 @@
                 android:padding="@dimen/card_view_content_padding">
 
                 <ImageView
+                    android:id="@+id/iv_MinMax"
                     android:layout_width="@dimen/identification_image_size"
                     android:layout_height="@dimen/identification_image_size"
                     android:layout_marginEnd="@dimen/identification_image_marginEnd"
@@ -145,6 +151,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/tv_minimum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -153,6 +160,7 @@
                         android:textStyle="bold"
                         tools:text="Minimum" />
                     <TextView
+                        android:id="@+id/tv_maximum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -183,7 +191,9 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/card_view_content_padding">
 
+
                 <ImageView
+                    android:id="@+id/iv_wind"
                     android:layout_width="@dimen/identification_image_size"
                     android:layout_height="@dimen/identification_image_size"
                     android:layout_marginEnd="@dimen/identification_image_marginEnd"
@@ -194,6 +204,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/tv_wind"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -202,6 +213,7 @@
                         android:textStyle="bold"
                         tools:text="Wind" />
                     <TextView
+                        android:id="@+id/tv_milesPerHour"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -247,6 +259,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/tv_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -255,6 +268,7 @@
                         android:textStyle="bold"
                         tools:text="Name" />
                     <TextView
+                        android:id="@+id/tv_country"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
@@ -290,7 +304,7 @@
                         app:srcCompat="@drawable/sunrise" />
 
                     <TextView
-                        android:id="@+id/tv_sunrise_time"
+                        android:id="@+id/tv_sunriseTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/secondary_text_color"
@@ -313,7 +327,7 @@
                         app:srcCompat="@drawable/sunset" />
 
                     <TextView
-                        android:id="@+id/tv_sunset_time"
+                        android:id="@+id/tv_sunsetTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/secondary_text_color"
